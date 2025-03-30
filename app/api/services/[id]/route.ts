@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
-interface Params {
-  params: {
-    id: string;
-  };
-}
-
 // GET /api/services/[id] - Get a single service
-export async function GET(request: NextRequest, { params }: Params) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const service = await db.service.findUnique({
       where: {
@@ -34,7 +31,10 @@ export async function GET(request: NextRequest, { params }: Params) {
 }
 
 // PUT /api/services/[id] - Update a service
-export async function PUT(request: NextRequest, { params }: Params) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const data = await request.json();
     
@@ -88,7 +88,10 @@ export async function PUT(request: NextRequest, { params }: Params) {
 }
 
 // DELETE /api/services/[id] - Delete a service
-export async function DELETE(request: NextRequest, { params }: Params) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     // Check if the service exists
     const existingService = await db.service.findUnique({

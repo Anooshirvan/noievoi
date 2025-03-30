@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
-interface Params {
-  params: {
-    id: string;
-  };
-}
-
 // GET /api/contact/[id] - Get a single contact message
-export async function GET(request: NextRequest, { params }: Params) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const message = await db.contactMessage.findUnique({
       where: {
@@ -34,7 +31,10 @@ export async function GET(request: NextRequest, { params }: Params) {
 }
 
 // PATCH /api/contact/[id] - Update a contact message status
-export async function PATCH(request: NextRequest, { params }: Params) {
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const data = await request.json();
     
@@ -81,7 +81,10 @@ export async function PATCH(request: NextRequest, { params }: Params) {
 }
 
 // DELETE /api/contact/[id] - Delete a contact message
-export async function DELETE(request: NextRequest, { params }: Params) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     // Check if the message exists
     const existingMessage = await db.contactMessage.findUnique({

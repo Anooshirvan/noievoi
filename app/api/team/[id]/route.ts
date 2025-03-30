@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
-interface Params {
-  params: {
-    id: string;
-  };
-}
-
 // GET /api/team/[id] - Get a single team member
-export async function GET(request: NextRequest, { params }: Params) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const teamMember = await db.teamMember.findUnique({
       where: {
@@ -34,7 +31,10 @@ export async function GET(request: NextRequest, { params }: Params) {
 }
 
 // PUT /api/team/[id] - Update a team member
-export async function PUT(request: NextRequest, { params }: Params) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const data = await request.json();
     
@@ -88,7 +88,10 @@ export async function PUT(request: NextRequest, { params }: Params) {
 }
 
 // DELETE /api/team/[id] - Delete a team member
-export async function DELETE(request: NextRequest, { params }: Params) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     // Check if the team member exists
     const existingMember = await db.teamMember.findUnique({

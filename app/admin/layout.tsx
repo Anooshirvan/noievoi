@@ -19,9 +19,12 @@ export default function AdminLayout({
       <div className="flex pt-16">
         <AdminSidebar />
         <div className="flex-1 lg:ml-64">
-          <main className="p-4 md:p-8">
+          <main className="p-4 md:p-8 pb-24">
             {children}
           </main>
+          <footer className="bg-white border-t border-gray-200 p-4 text-center text-gray-500 text-sm mt-auto">
+            <p>© {new Date().getFullYear()} Noievoi Admin Panel</p>
+          </footer>
         </div>
       </div>
     </div>
